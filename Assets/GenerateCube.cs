@@ -1,6 +1,7 @@
 ﻿// COMP30019 - Graphics and Interaction
 // (c) University of Melbourne, 2022
 
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -45,9 +46,9 @@ public class GenerateCube : MonoBehaviour
         };
 
         // Define the vertex positions (same as workshop 2).
+
         mesh.SetVertices(new[]
         {
-            // Top face
             new Vector3(-1.0f, 1.0f, -1.0f),
             new Vector3(-1.0f, 1.0f, 1.0f),
             new Vector3(1.0f, 1.0f, 1.0f),
@@ -161,57 +162,60 @@ public class GenerateCube : MonoBehaviour
         });
 
         // Task 1: Define the correct normals (as unit vectors; currently they're all "zero")
-        var topNormal = new Vector3(0.0f, 0.0f, 0.0f);
-        var bottomNormal = new Vector3(0.0f, 0.0f, 0.0f);
-        var leftNormal = new Vector3(0.0f, 0.0f, 0.0f);
-        var rightNormal = new Vector3(0.0f, 0.0f, 0.0f);
-        var frontNormal = new Vector3(0.0f, 0.0f, 0.0f);
-        var backNormal = new Vector3(0.0f, 0.0f, 0.0f);
+        //var topNormal = new Vector3(0.0f, 1.0f, 0.0f);
+        //var bottomNormal = new Vector3(0.0f, -1.0f, 0.0f);
+        //var leftNormal = new Vector3(-1.0f, 0.0f, 0.0f);
+        //var rightNormal = new Vector3(1.0f, 0.0f, 0.0f);
+        //var frontNormal = new Vector3(0.0f, 0.0f, 1.0f);
+        //var backNormal = new Vector3(0.0f, 0.0f, -1.0f);
+        var normals = new List<Vector3>();
+        mesh.GetVertices(normals);
+        mesh.SetNormals(normals.Select(a => a.normalized).ToArray());
 
-        mesh.SetNormals(new[]
-        {
-            topNormal, // Top
-            topNormal,
-            topNormal,
-            topNormal,
-            topNormal,
-            topNormal,
+        //mesh.SetNormals(new[]
+        //{
+        //    topNormal, // Top
+        //    topNormal,
+        //    topNormal,
+        //    topNormal,
+        //    topNormal,
+        //    topNormal,
 
-            bottomNormal, // Bottom
-            bottomNormal,
-            bottomNormal,
-            bottomNormal,
-            bottomNormal,
-            bottomNormal,
+        //    bottomNormal, // Bottom
+        //    bottomNormal,
+        //    bottomNormal,
+        //    bottomNormal,
+        //    bottomNormal,
+        //    bottomNormal,
 
-            leftNormal, // Left
-            leftNormal,
-            leftNormal,
-            leftNormal,
-            leftNormal,
-            leftNormal,
+        //    leftNormal, // Left
+        //    leftNormal,
+        //    leftNormal,
+        //    leftNormal,
+        //    leftNormal,
+        //    leftNormal,
 
-            rightNormal, // Right
-            rightNormal,
-            rightNormal,
-            rightNormal,
-            rightNormal,
-            rightNormal,
+        //    rightNormal, // Right
+        //    rightNormal,
+        //    rightNormal,
+        //    rightNormal,
+        //    rightNormal,
+        //    rightNormal,
 
-            frontNormal, // Front
-            frontNormal,
-            frontNormal,
-            frontNormal,
-            frontNormal,
-            frontNormal,
+        //    frontNormal, // Front
+        //    frontNormal,
+        //    frontNormal,
+        //    frontNormal,
+        //    frontNormal,
+        //    frontNormal,
 
-            backNormal, // Back
-            backNormal,
-            backNormal,
-            backNormal,
-            backNormal,
-            backNormal
-        });
+        //    backNormal, // Back
+        //    backNormal,
+        //    backNormal,
+        //    backNormal,
+        //    backNormal,
+        //    backNormal
+        //});
 
         // Define the indices (same as workshop 2).
         var indices = Enumerable.Range(0, mesh.vertices.Length).ToArray();
